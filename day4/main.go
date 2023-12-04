@@ -52,7 +52,6 @@ func main() {
 				}
 			}
 		}
-
 		sum += points
 	}
 
@@ -96,14 +95,10 @@ func parseInput(lines []string) []Card {
 			Instances: 1,
 		}
 
-		colon := strings.Index(line, ":")
-
-		line = line[colon+1:]
-
+		line = strings.Split(line, ":")[1]
 		line = strings.ReplaceAll(line, "  ", " ")
 
 		halves := strings.Split(line, "|")
-
 		halves[0] = strings.TrimSpace(halves[0])
 		halves[1] = strings.TrimSpace(halves[1])
 
@@ -125,7 +120,6 @@ func parseInput(lines []string) []Card {
 			}
 			card.Have = append(card.Have, n)
 		}
-
 		cards = append(cards, card)
 	}
 
