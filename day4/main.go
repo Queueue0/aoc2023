@@ -60,17 +60,15 @@ func main() {
 
 	// Part 2
 	for i, c := range cards {
-		for k := 0; k < c.Instances; k++ {
-			hits := 0
-			for _, n := range c.Have {
-				if slices.Contains(c.Winning, n) {
-					hits += 1
-				}
+		hits := 0
+		for _, n := range c.Have {
+			if slices.Contains(c.Winning, n) {
+				hits += 1
 			}
+		}
 
-			for j := i + 1; j <= i+hits; j++ {
-				cards[j].Instances++
-			}
+		for j := i + 1; j <= i+hits; j++ {
+			cards[j].Instances += c.Instances
 		}
 	}
 
