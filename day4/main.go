@@ -95,8 +95,6 @@ func parseInput(lines []string) []Card {
 		line = strings.Split(line, ":")[1]
 
 		halves := strings.Split(line, "|")
-		halves[0] = strings.TrimSpace(halves[0])
-		halves[1] = strings.TrimSpace(halves[1])
 
 		swn := strings.Fields(halves[0])
 		shn := strings.Fields(halves[1])
