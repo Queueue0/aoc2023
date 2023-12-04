@@ -58,7 +58,9 @@ func main() {
 	fmt.Println(sum)
 
 	// Part 2
+	totalCards := 0
 	for i, c := range cards {
+		totalCards += c.Instances
 		hits := 0
 		for _, n := range c.Have {
 			if slices.Contains(c.Winning, n) {
@@ -69,11 +71,6 @@ func main() {
 		for j := i + 1; j <= i+hits; j++ {
 			cards[j].Instances += c.Instances
 		}
-	}
-
-	totalCards := 0
-	for _, c := range cards {
-		totalCards += c.Instances
 	}
 
 	fmt.Println(totalCards)
@@ -96,14 +93,13 @@ func parseInput(lines []string) []Card {
 		}
 
 		line = strings.Split(line, ":")[1]
-		line = strings.ReplaceAll(line, "  ", " ")
 
 		halves := strings.Split(line, "|")
 		halves[0] = strings.TrimSpace(halves[0])
 		halves[1] = strings.TrimSpace(halves[1])
 
-		swn := strings.Split(halves[0], " ")
-		shn := strings.Split(halves[1], " ")
+		swn := strings.Fields(halves[0])
+		shn := strings.Fields(halves[1])
 
 		for _, s := range swn {
 			n, err := strconv.Atoi(s)
