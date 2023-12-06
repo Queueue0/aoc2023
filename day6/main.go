@@ -60,12 +60,7 @@ func main() {
 
 	total := 1
 	for _, race := range races {
-		b := float64(-race.MaxTime)
-		c := float64(race.MinDist + 1)
-		first := math.Ceil((-b - math.Sqrt((b*b)-(4*c))) / 2)
-		last := math.Floor((-b + math.Sqrt((b*b)-(4*c))) / 2)
-		ways := last - first + 1
-		fmt.Println(race, first, last, ways)
+		ways := race.GetWays()
 		total *= int(ways)
 	}
 
@@ -98,13 +93,7 @@ func main() {
 	// Part 2 (quadratic)
 	race := parseInput2(lines)
 
-	b := float64(-race.MaxTime)
-	c := float64(race.MinDist + 1)
-	first := math.Ceil((-b - math.Sqrt((b*b)-(4*c))) / 2)
-	last := math.Floor((-b + math.Sqrt((b*b)-(4*c))) / 2)
-	ways := last - first + 1
-	fmt.Println(race, first, last, ways)
-
+	ways := race.GetWays()
 	fmt.Println(int(ways))
 }
 
@@ -157,4 +146,14 @@ func (r *Race) GetDist(n int) int {
 func (r *Race) IsFirst(n int) bool {
 	// If n beats the distance and n-1 doesn't
 	return (r.GetDist(n) > r.MinDist && r.GetDist(n-1) <= r.MinDist)
+}
+
+func (r *Race) GetWays() int {
+	b := float64(-r.MaxTime)
+	c := float64(r.MinDist + 1)
+	first := math.Ceil((-b - math.Sqrt((b*b)-(4*c))) / 2)
+	last := math.Floor((-b + math.Sqrt((b*b)-(4*c))) / 2)
+	ways := last - first + 1
+
+	return int(ways)
 }
