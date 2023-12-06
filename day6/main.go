@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -25,62 +26,85 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Part 1
+	// Part 1 (original)
+	//	races := parseInput(lines)
+	//
+	//	total := 1
+	//	for _, race := range races {
+	//		half := race.MaxTime / 2
+	//		n := half / 2
+	//		mini := 0
+	//		maxi := half
+	//		fmt.Println(race, mini, maxi, n)
+	//
+	//		for !race.IsFirst(n) {
+	//			if race.GetDist(n) > race.MinDist {
+	//				maxi = n - 1
+	//			} else {
+	//				mini = n + 1
+	//			}
+	//			n = (mini + maxi) / 2
+	//			fmt.Println(race, mini, maxi, n)
+	//		}
+	//
+	//		ways := (half - n + 1) * 2
+	//		if race.MaxTime%2 == 0 {
+	//			ways--
+	//		}
+	//
+	//		total *= ways
+	//	}
+
+	// Part 1 (Quadratic)
 	races := parseInput(lines)
 
 	total := 1
 	for _, race := range races {
-		half := race.MaxTime / 2
-		n := half / 2
-		mini := 0
-		maxi := half
-		fmt.Println(race, mini, maxi, n)
-
-		for !race.IsFirst(n) {
-			if race.GetDist(n) > race.MinDist {
-				maxi = n - 1
-			} else {
-				mini = n + 1
-			}
-			n = (mini + maxi) / 2
-			fmt.Println(race, mini, maxi, n)
-		}
-
-		ways := (half - n + 1) * 2
-		if race.MaxTime%2 == 0 {
-			ways--
-		}
-
-		total *= ways
+		b := float64(-race.MaxTime)
+		c := float64(race.MinDist + 1)
+		first := math.Ceil((-b - math.Sqrt((b*b)-(4*c))) / 2)
+		last := math.Floor((-b + math.Sqrt((b*b)-(4*c))) / 2)
+		ways := last - first + 1
+		fmt.Println(race, first, last, ways)
+		total *= int(ways)
 	}
 
 	fmt.Println(total)
 
-	// Part 2
+	// Part 2 (original)
+	//	race := parseInput2(lines)
+	//
+	//	half := race.MaxTime / 2
+	//	n := half / 2
+	//	mini := 0
+	//	maxi := half
+	//	fmt.Println(race, mini, maxi, n)
+	//
+	//	for !race.IsFirst(n) {
+	//		if race.GetDist(n) > race.MinDist {
+	//			maxi = n - 1
+	//		} else {
+	//			mini = n + 1
+	//		}
+	//		n = (mini + maxi) / 2
+	//		fmt.Println(race, mini, maxi, n)
+	//	}
+	//
+	//	ways := (half - n + 1) * 2
+	//	if race.MaxTime%2 == 0 {
+	//		ways--
+	//	}
+
+	// Part 2 (quadratic)
 	race := parseInput2(lines)
 
-	half := race.MaxTime / 2
-	n := half / 2
-	mini := 0
-	maxi := half
-	fmt.Println(race, mini, maxi, n)
+	b := float64(-race.MaxTime)
+	c := float64(race.MinDist + 1)
+	first := math.Ceil((-b - math.Sqrt((b*b)-(4*c))) / 2)
+	last := math.Floor((-b + math.Sqrt((b*b)-(4*c))) / 2)
+	ways := last - first + 1
 
-	for !race.IsFirst(n) {
-		if race.GetDist(n) > race.MinDist {
-			maxi = n - 1
-		} else {
-			mini = n + 1
-		}
-		n = (mini + maxi) / 2
-		fmt.Println(race, mini, maxi, n)
-	}
-
-	ways := (half - n + 1) * 2
-	if race.MaxTime%2 == 0 {
-		ways--
-	}
-
-	fmt.Println(ways)
+	fmt.Println(int(ways))
 }
 
 func readLines(path string) ([]string, error) {
