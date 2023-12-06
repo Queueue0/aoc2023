@@ -103,6 +103,7 @@ func main() {
 	first := math.Ceil((-b - math.Sqrt((b*b)-(4*c))) / 2)
 	last := math.Floor((-b + math.Sqrt((b*b)-(4*c))) / 2)
 	ways := last - first + 1
+	fmt.Println(race, first, last, ways)
 
 	fmt.Println(int(ways))
 }
