@@ -34,7 +34,7 @@ func main() {
 		n := half / 2
 		mini := 0
 		maxi := half
-		fmt.Println(race, half, n)
+		fmt.Println(race, mini, maxi, n)
 
 		for !race.IsFirst(n) {
 			if race.GetDist(n) > race.MinDist {
@@ -43,7 +43,7 @@ func main() {
 				mini = n + 1
 			}
 			n = (mini + maxi) / 2
-			fmt.Println(race, half, n)
+			fmt.Println(race, mini, maxi, n)
 		}
 
 		ways := (half - n + 1) * 2
@@ -63,7 +63,7 @@ func main() {
 	n := half / 2
 	mini := 0
 	maxi := half
-	fmt.Println(race, half, n)
+	fmt.Println(race, mini, maxi, n)
 
 	for !race.IsFirst(n) {
 		if race.GetDist(n) > race.MinDist {
@@ -72,7 +72,7 @@ func main() {
 			mini = n + 1
 		}
 		n = (mini + maxi) / 2
-		fmt.Println(race, half, n)
+		fmt.Println(race, mini, maxi, n)
 	}
 
 	ways := (half - n + 1) * 2
