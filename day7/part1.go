@@ -65,9 +65,20 @@ func parseInput(lines []string) []Hand {
 		wager, _ := strconv.Atoi(rawHand[1])
 
 		cardset := make(map[rune]int)
+		//	maxCount := 0
 		for _, r := range cards {
 			cardset[r] += 1
+			//	if cardset[r] > maxCount {
+			//		maxCount = cardset[r]
+			//	}
 		}
+
+		// I thought I was so smart with the below solution, but I could have
+		// just done this:
+		//
+		// strength := maxCount - len(cardset)
+		//
+		// Credit: /u/Afkadrian
 
 		strength := 0
 		// If there's only one unique card then it's 5 of a kind
