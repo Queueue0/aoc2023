@@ -80,7 +80,7 @@ func parseInput(lines []string) []Hand {
 				}
 			}
 
-			cards = strings.Replace(cards, "J", string(c), 5)
+			cards = strings.Replace(cards, "J", string(c), -1)
 
 			cardset = make(map[rune]int)
 			for _, r := range cards {
