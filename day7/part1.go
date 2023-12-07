@@ -51,7 +51,7 @@ func main() {
 	sum := 0
 	for i, h := range hands {
 		fmt.Printf("%+v\n", h)
-		sum += (i+1) * h.Wager
+		sum += (i + 1) * h.Wager
 	}
 
 	fmt.Println(sum)
@@ -112,8 +112,8 @@ func parseInput(lines []string) []Hand {
 		}
 
 		hands[i] = Hand{
-			Cards: cards,
-			Wager: wager,
+			Cards:    cards,
+			Wager:    wager,
 			Strength: strength,
 		}
 	}
