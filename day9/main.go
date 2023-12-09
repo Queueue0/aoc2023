@@ -57,6 +57,7 @@ func main() {
 			}
 		}
 
+		// This loop is the only difference between the 2 solutions
 		for i := len(diffs)-1; i >= 0; i-- {
 			prediction = diffs[i][0] - prediction
 		}
