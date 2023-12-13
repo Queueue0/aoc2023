@@ -103,7 +103,8 @@ func main() {
 			for j := range p[i] {
 				c := make(pattern, len(p))
 				for x, line := range p {
-					c[x] = []rune(string(line))
+					c[x] = make([]rune, len(line))
+					copy(c[x], line)
 				}
 				if c[i][j] == '.' {
 					c[i][j] = '#'
