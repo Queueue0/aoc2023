@@ -71,22 +71,25 @@ func main() {
 	fmt.Println()
 
 	for i := 0; i < 1000; i++ {
-		transform(rs, 'N')
-		transform(rs, 'W')
-		transform(rs, 'S')
-		transform(rs, 'E')
+		spin(rs)
 	}
 
-	sum := 0
-	for i, r := range rs {
-		rowScore := len(rs) - i
-		fmt.Println(r, rowScore, strings.Count(string(r), "O"), strings.Count(string(r), "O")*rowScore)
-		sum += strings.Count(string(r), "O") * rowScore
+	mrs := make([]Rocks, len(rs))
+	for i := range rs {
+		mrs[i] = make(Rocks, len(rs[i]))
+		copy(mrs[i], rs[i])
 	}
 
-	fmt.Println(verify(rs2, rs))
+	var p int
+	for p = 0; p == 0 || !equalRocks(rs, mrs); p++ {
+		spin(rs)
+	}
 
-	fmt.Println(sum)
+	for i := 0; i < (1000000000-1000)%p; i++ {
+		spin(rs)
+	}
+
+	fmt.Println(score(rs))
 }
 
 func readLines(path string) ([]string, error) {
@@ -180,5 +183,31 @@ func verify(r1, r2 []Rocks) bool {
 		}
 	}
 
+	return true
+}
+
+func spin(rs []Rocks) {
+	transform(rs, 'N')
+	transform(rs, 'W')
+	transform(rs, 'S')
+	transform(rs, 'E')
+}
+
+func score(rs []Rocks) int {
+	sum := 0
+	for i, r := range rs {
+		rowScore := len(rs) - i
+		fmt.Println(r, rowScore, strings.Count(string(r), "O"), strings.Count(string(r), "O")*rowScore)
+		sum += strings.Count(string(r), "O") * rowScore
+	}
+	return sum
+}
+
+func equalRocks(r1, r2 []Rocks) bool {
+	for i := range r1 {
+		if string(r1[i]) != string(r2[i]) {
+			return false
+		}
+	}
 	return true
 }
