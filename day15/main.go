@@ -34,10 +34,10 @@ func main() {
 
 	// Go's maps aren't ordered, so I had to do some degeneracy to
 	// keep track of the positions of lenses
-	boxes := make(map[int]map[string][2]int)
+	boxes := make([]map[string][2]int, 256)
 	for _, step := range steps {
 		box := hash(step.Label)
-		if _, ok := boxes[box]; !ok {
+		if boxes[box] == nil {
 			boxes[box] = make(map[string][2]int)
 		}
 		if step.Operation == '-' {
