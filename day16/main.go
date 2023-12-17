@@ -37,7 +37,7 @@ func (g Grid) Traverse(x, y int, dir rune) {
 				dir = 'U'
 			case 'L':
 				dir = 'D'
-			case 'U': 
+			case 'U':
 				dir = 'R'
 			case 'D':
 				dir = 'L'
@@ -50,7 +50,7 @@ func (g Grid) Traverse(x, y int, dir rune) {
 				dir = 'D'
 			case 'L':
 				dir = 'U'
-			case 'U': 
+			case 'U':
 				dir = 'L'
 			case 'D':
 				dir = 'R'
@@ -111,12 +111,13 @@ func main() {
 	}
 
 	grid := parseLines(lines)
-	
+
 	me := 0
 	for x := range grid {
 		grid.Traverse(x, 0, 'R')
 		me = max(me, grid.CountEnergized())
 		grid.Reset()
+
 		grid.Traverse(x, len(grid[x])-1, 'L')
 		me = max(me, grid.CountEnergized())
 		grid.Reset()
@@ -126,6 +127,7 @@ func main() {
 		grid.Traverse(0, y, 'D')
 		me = max(me, grid.CountEnergized())
 		grid.Reset()
+
 		grid.Traverse(len(grid)-1, y, 'U')
 		me = max(me, grid.CountEnergized())
 		grid.Reset()
